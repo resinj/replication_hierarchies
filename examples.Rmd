@@ -1,0 +1,321 @@
+---
+title: "Examples"
+output:
+  html_document:
+    df_print: paged
+    keep_md: true
+---
+
+```{r, message=FALSE}
+source("functions.R")
+```
+
+#### Examples from Table 2
+
+Example 2.8 
+
+```{r plotQC}
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)
+
+sle_DC = construct_sle_DC(k,n,f)
+
+g_hom = solve_hom(sle_DC)
+g_part = sle_DC$f
+
+c = c(0.4,0.4,0.4)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+fractions(t(g/n))
+
+test_all(k,n,f,g)
+
+plot_QC(k,n,f,g)
+```
+
+The figure plots upper and lower coverage (top) and predicted quantiles against quantile levels to facilitate visual verification of the quantile calibration condition.
+
+Example 2.9
+
+```{r plotUQC2.9}
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)[,c(1,1,1,2,3)]
+g = matrix(c(0.5,0.4,0.1,
+             0.1,0.2,0.7,
+             0.4,0.1,0.5),nrow = 3)[,c(1,1,1,2,3)] * n
+
+sle_TC = construct_sle_TC(k,n,f)
+
+TC = test_sle(sle_TC,g)
+
+cbind(test_all(k,n,f,g),TC)
+
+plot_UQC(k,n,f,g)
+```
+
+#### Examples from Table 3
+
+Example 3.3 (w = 0)
+
+```{r plotUQC3.3}
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)
+
+sle_DC = construct_sle_DC(k,n,f)
+
+g_part = sle_DC$f
+g_hom = solve_hom(sle_DC)
+
+c = -c(2,0,0)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+DC = test_sle(sle_DC,g)
+
+cbind(test_all(k,n,f,g),DC)
+
+plot_UQC(k,n,f,g)
+```
+
+The example is not unconditionally quantile calibrated because the upper coverage is not above the diagonal, e.g., $\mathbb{Q}(Y < F^{-1}(0.24)) = 1/6 < 0.24$.
+
+Example 3.4: See below.
+
+#### Examples from Table 4
+
+Example: Vaicenavicius et al. (2019, Table 1)
+
+```{r}
+k = 3
+n = 10
+
+f = matrix(c(0.1,0.3,0.6,
+             0.1,0.6,0.3,
+             0.3,0.1,0.6,
+             0.3,0.6,0.1,
+             0.6,0.1,0.3,
+             0.6,0.3,0.1),nrow = 3) * n
+g = matrix(c(0.2,0.2,0.6,
+             0.0,0.7,0.3,
+             0.2,0.2,0.6,
+             0.4,0.5,0.1,
+             0.7,0.0,0.3,
+             0.5,0.4,0.1),nrow = 3) * n
+
+test_all(k,n,f,g)
+```
+
+Example: Vaicenavicius et al. (2019, Supplement, Table 2)
+
+```{r}
+k = 3
+n = 10
+f = matrix(c(0.6,0.1,0.3,
+             0.4,0.6,0.0),nrow = 3) * n
+g = matrix(c(0.7,0.2,0.1,
+             0.3,0.5,0.2),nrow = 3) * n
+
+test_all(k,n,f,g)
+```
+
+Example: Silva Filho et al. (2023, Footnote 2)
+
+```{r}
+k = 3
+n = 10
+f = matrix(c(0.3,0.3,0.4,
+             0.4,0.3,0.3,
+             0.4,0.6,0.0,
+             0.3,0.6,0.1),nrow = k) * n
+g = matrix(c(0.4,0.2,0.4,
+             0.3,0.4,0.3,
+             0.5,0.5,0.0,
+             0.2,0.7,0.1),nrow = k) * n
+
+test_all(k,n,f,g)
+```
+
+Example: Gneiting and Resin (2023, Example 2.4 (b))
+For an illustrative analysis, see 'illustration.[Rmd/html]'.
+
+```{r}
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)
+
+sle_MC = construct_sle_MC(k,n,f)
+sle_PC = construct_sle_PC(k,n,f)
+
+sle = combine_sle(sle_MC,sle_PC)
+
+g_part = sle$f
+g_hom = solve_hom(sle)
+
+c = -0.6 # in [-1,1] for (multiples of) probabilities
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+test_all(k,n,f,g)
+```
+
+Example: Gneiting and Resin (2023, Example 2.14 (b))
+
+```{r}
+k = 3
+n = 4
+f = generate_forecasts(k,n)
+
+sle_TC = construct_sle_TC(k,n,f)
+
+g_part = sle_TC$f
+g_hom = solve_hom(sle_TC)
+
+c = c(-0.6,0.6)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+# g = matrix(c(0.5,0.4,0.1,
+#              0.1,0.5,0.4,
+#              0.4,0.1,0.5),nrow = 3) * n
+
+test_all(k,n,f,g)
+```
+
+Example 3.3 (w = 0.5)
+
+```{r}
+# Construct example with 3 classes (w = 0)
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)
+
+sle_DC = construct_sle_DC(k,n,f)
+
+g_part = sle_DC$f
+g_hom = solve_hom(sle_DC)
+
+c = -c(2,0,0)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+# Add fourth class with probability w = 0.5 = 4/8 and rescale other probabilities
+# by doubling n
+k = 4
+n = 8
+
+f = rbind(f, c(4,4,4))
+g = rbind(g, c(4,4,4))
+
+sle_DC = construct_sle_DC(k,n,f)
+DC = test_sle(sle_DC,g)
+
+cbind(test_all(k,n,f,g),DC)
+
+# plot_UQC(k,n,f,g)
+```
+
+Example 3.4
+
+```{r}
+k = 3
+n = 5
+
+f = generate_forecasts(k,n)
+
+sle_fCC = construct_sle_fCC(k,n,f)
+
+g_part = sle_fCC$f
+g_hom = solve_hom(sle_fCC)
+
+c =  1
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+sle_DC = construct_sle_DC(k,n,f)
+DC = test_sle(sle_DC,g)
+
+cbind(test_all(k,n,f,g),DC)
+```
+Note: As the example satisfies CC, it also satisfies QC in Table 3.
+
+Example 3.13
+
+```{r}
+k = 4
+n = 5
+
+f = generate_forecasts(k,n)
+
+sle_CwC = construct_sle_CwC(k,n,f)
+
+g_part = sle_CwC$f
+g_hom = solve_hom(sle_CwC)
+
+c = c(-0.5,-0.5,-0.5,1,1)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+test_all(k,n,f,g)
+```
+
+Example 3.14
+
+```{r}
+k = 3
+n = 4
+
+f = generate_forecasts(k,n)
+
+sle_PC = construct_sle_PC(k,n,f)
+sle_aPC = construct_sle_aPC(k,n,f)
+sle = combine_sle(sle_PC,sle_aPC)
+
+g_part = sle_PC$f
+g_hom = solve_hom(sle)
+
+c = c(2/3,2/3)
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+test_all(k,n,f,g)
+```
+
+Example 3.15
+
+```{r}
+k = 3
+n = 6
+
+f = generate_forecasts(k,n)[,-c(3,4,5,6)]
+
+sle_fPC = construct_sle_fPC(k,n,f)
+
+g_part = sle_fPC$f
+g_hom = solve_hom(sle_fPC)
+
+c = 8/5
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+test_all(k,n,f,g)
+```
+
+Example 3.16 (Note: Finding such an example with only N = 13 forecasts required a lot of searching...)
+
+```{r}
+load("forecasts13.RData")
+f = forecasts
+k = nrow(f) # 3
+n = sum(f[,1]) # 10
+
+sle_fCC = construct_sle_fCC(k,n,f)
+
+g_part = sle_fCC$f
+g_hom = solve_hom(sle_fCC)
+
+c = 0.14
+g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
+
+test_all(k,n,f,g)
+```
+
+
