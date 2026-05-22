@@ -1,9 +1,11 @@
 ---
 title: "Illustrative example"
 output: 
-  html_document:
-    df_print: paged
-    keep_md: true
+  github_document: default
+  html_document: default
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,
+  output_format = "all") })
 ---
 
 We start by loading the functions implementing example generation, linear constraints and some visualizations (and some packages required by the functions).

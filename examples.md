@@ -1,11 +1,5 @@
----
-title: "Examples"
-output:
-  html_document:
-    df_print: paged
-    keep_md: true
----
-
+Examples
+================
 
 ``` r
 source("functions.R")
@@ -13,8 +7,7 @@ source("functions.R")
 
 #### Examples from Table 2
 
-Example 2.8 
-
+##### Example 2.8
 
 ``` r
 k = 3
@@ -33,32 +26,29 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 fractions(t(g/n))
 ```
 
-```
-##      [,1] [,2] [,3]
-## [1,]  3/5 7/20 1/20
-## [2,] 7/20  2/5  1/4
-## [3,] 3/20 3/20 7/10
-```
+    ##      [,1] [,2] [,3]
+    ## [1,]  3/5 7/20 1/20
+    ## [2,] 7/20  2/5  1/4
+    ## [3,] 3/20 3/20 7/10
 
 ``` r
 test_all(k,n,f,g)
 ```
 
-```
-##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC
-## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-```
+    ##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC
+    ## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
 ``` r
 plot_QC(k,n,f,g)
 ```
 
-![](examples_files/figure-html/plotQC-1.png)<!-- -->
+![](examples_files/figure-gfm/plotQC-1.png)<!-- -->
 
-The figure plots upper and lower coverage (top) and predicted quantiles against quantile levels to facilitate visual verification of the quantile calibration condition.
+The figure plots upper and lower coverage (top) and predicted quantiles
+against quantile levels to facilitate visual verification of the
+quantile calibration condition.
 
-Example 2.9
-
+##### Example 2.9
 
 ``` r
 k = 3
@@ -76,21 +66,18 @@ TC = test_sle(sle_TC,g)
 cbind(test_all(k,n,f,g),TC)
 ```
 
-```
-##        CwC   MC   fCC   pCC   fPC   pPC   aPC   fTC  pTC   TC
-## [1,] FALSE TRUE FALSE FALSE FALSE FALSE FALSE FALSE TRUE TRUE
-```
+    ##        CwC   MC   fCC   pCC   fPC   pPC   aPC   fTC  pTC   TC
+    ## [1,] FALSE TRUE FALSE FALSE FALSE FALSE FALSE FALSE TRUE TRUE
 
 ``` r
 plot_UQC(k,n,f,g)
 ```
 
-![](examples_files/figure-html/plotUQC2.9-1.png)<!-- -->
+![](examples_files/figure-gfm/plotUQC2.9-1.png)<!-- -->
 
 #### Examples from Table 3
 
-Example 3.3 (w = 0)
-
+##### Example 3.3 (w = 0)
 
 ``` r
 k = 3
@@ -111,25 +98,24 @@ DC = test_sle(sle_DC,g)
 cbind(test_all(k,n,f,g),DC)
 ```
 
-```
-##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC   DC
-## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE
-```
+    ##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC   DC
+    ## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE
 
 ``` r
 plot_UQC(k,n,f,g)
 ```
 
-![](examples_files/figure-html/plotUQC3.3-1.png)<!-- -->
+![](examples_files/figure-gfm/plotUQC3.3-1.png)<!-- -->
 
-The example is not unconditionally quantile calibrated because the upper coverage is not above the diagonal, e.g., $\mathbb{Q}(Y < F^{-1}(0.24)) = 1/6 < 0.24$.
+The example is not unconditionally quantile calibrated because the upper
+coverage is not above the diagonal, e.g.,
+$\mathbb{Q}(Y < F^{-1}(0.24)) = 1/6 < 0.24$.
 
-Example 3.4: See below.
+##### Example 3.4: See below.
 
 #### Examples from Table 4
 
-Example: Vaicenavicius et al. (2019, Table 1)
-
+##### Example: Vaicenavicius et al. (2019, Table 1)
 
 ``` r
 k = 3
@@ -151,13 +137,10 @@ g = matrix(c(0.2,0.2,0.6,
 test_all(k,n,f,g)
 ```
 
-```
-##       CwC   MC   fCC  pCC   fPC  pPC  aPC  fTC  pTC
-## [1,] TRUE TRUE FALSE TRUE FALSE TRUE TRUE TRUE TRUE
-```
+    ##       CwC   MC   fCC  pCC   fPC  pPC  aPC  fTC  pTC
+    ## [1,] TRUE TRUE FALSE TRUE FALSE TRUE TRUE TRUE TRUE
 
-Example: Vaicenavicius et al. (2019, Supplement, Table 2)
-
+##### Example: Vaicenavicius et al. (2019, Supplement, Table 2)
 
 ``` r
 k = 3
@@ -170,13 +153,10 @@ g = matrix(c(0.7,0.2,0.1,
 test_all(k,n,f,g)
 ```
 
-```
-##        CwC   MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC
-## [1,] FALSE TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-```
+    ##        CwC   MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC
+    ## [1,] FALSE TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
-Example: Silva Filho et al. (2023, Footnote 2)
-
+##### Example: Silva Filho et al. (2023, Footnote 2)
 
 ``` r
 k = 3
@@ -193,14 +173,12 @@ g = matrix(c(0.4,0.2,0.4,
 test_all(k,n,f,g)
 ```
 
-```
-##       CwC   MC   fCC  pCC   fPC  pPC   aPC  fTC  pTC
-## [1,] TRUE TRUE FALSE TRUE FALSE TRUE FALSE TRUE TRUE
-```
+    ##       CwC   MC   fCC  pCC   fPC  pPC   aPC  fTC  pTC
+    ## [1,] TRUE TRUE FALSE TRUE FALSE TRUE FALSE TRUE TRUE
 
-Example: Gneiting and Resin (2023, Example 2.4 (b))
-For an illustrative analysis, see 'illustration.[Rmd/html]'.
+##### Example: Gneiting and Resin (2023, Example 2.4 (b))
 
+For an illustrative analysis, see ‘illustration.\[Rmd/html\]’.
 
 ``` r
 k = 3
@@ -222,13 +200,10 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##        CwC   MC   fCC  pCC   fPC  pPC   aPC   fTC  pTC
-## [1,] FALSE TRUE FALSE TRUE FALSE TRUE FALSE FALSE TRUE
-```
+    ##        CwC   MC   fCC  pCC   fPC  pPC   aPC   fTC  pTC
+    ## [1,] FALSE TRUE FALSE TRUE FALSE TRUE FALSE FALSE TRUE
 
-Example: Gneiting and Resin (2023, Example 2.14 (b))
-
+##### Example: Gneiting and Resin (2023, Example 2.14 (b))
 
 ``` r
 k = 3
@@ -249,13 +224,10 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##       CwC   MC   fCC   pCC   fPC   pPC  aPC  fTC  pTC
-## [1,] TRUE TRUE FALSE FALSE FALSE FALSE TRUE TRUE TRUE
-```
+    ##       CwC   MC   fCC   pCC   fPC   pPC  aPC  fTC  pTC
+    ## [1,] TRUE TRUE FALSE FALSE FALSE FALSE TRUE TRUE TRUE
 
-Example 3.3 (w = 0.5)
-
+##### Example 3.3 (w = 0.5)
 
 ``` r
 # Construct example with 3 classes (w = 0)
@@ -286,17 +258,14 @@ DC = test_sle(sle_DC,g)
 cbind(test_all(k,n,f,g),DC)
 ```
 
-```
-##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC   DC
-## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE
-```
+    ##        CwC    MC   fCC   pCC   fPC   pPC   aPC   fTC   pTC   DC
+    ## [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE
 
 ``` r
 # plot_UQC(k,n,f,g)
 ```
 
-Example 3.4
-
+##### Example 3.4
 
 ``` r
 k = 3
@@ -318,14 +287,12 @@ DC = test_sle(sle_DC,g)
 cbind(test_all(k,n,f,g),DC)
 ```
 
-```
-##       CwC   MC  fCC  pCC  fPC  pPC  aPC  fTC  pTC    DC
-## [1,] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE FALSE
-```
+    ##       CwC   MC  fCC  pCC  fPC  pPC  aPC  fTC  pTC    DC
+    ## [1,] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE FALSE
+
 Note: As the example satisfies CC, it also satisfies QC in Table 3.
 
-Example 3.13
-
+##### Example 3.13
 
 ``` r
 k = 4
@@ -344,13 +311,10 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##       CwC   MC   fCC   pCC   fPC   pPC  aPC   fTC   pTC
-## [1,] TRUE TRUE FALSE FALSE FALSE FALSE TRUE FALSE FALSE
-```
+    ##       CwC   MC   fCC   pCC   fPC   pPC  aPC   fTC   pTC
+    ## [1,] TRUE TRUE FALSE FALSE FALSE FALSE TRUE FALSE FALSE
 
-Example 3.14
-
+##### Example 3.14
 
 ``` r
 k = 3
@@ -371,13 +335,10 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##        CwC    MC   fCC   pCC   fPC  pPC  aPC   fTC   pTC
-## [1,] FALSE FALSE FALSE FALSE FALSE TRUE TRUE FALSE FALSE
-```
+    ##        CwC    MC   fCC   pCC   fPC  pPC  aPC   fTC   pTC
+    ## [1,] FALSE FALSE FALSE FALSE FALSE TRUE TRUE FALSE FALSE
 
-Example 3.15
-
+##### Example 3.15
 
 ``` r
 k = 3
@@ -396,13 +357,10 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##        CwC   MC   fCC   pCC  fPC  pPC  aPC   fTC   pTC
-## [1,] FALSE TRUE FALSE FALSE TRUE TRUE TRUE FALSE FALSE
-```
+    ##        CwC   MC   fCC   pCC  fPC  pPC  aPC   fTC   pTC
+    ## [1,] FALSE TRUE FALSE FALSE TRUE TRUE TRUE FALSE FALSE
 
-Example 3.16 (Note: Finding such an example with only N = 13 forecasts required a lot of searching...)
-
+##### Example 3.16 (Note: Finding such an example with only N = 13 forecasts required a lot of searching…)
 
 ``` r
 load("forecasts13.RData")
@@ -421,9 +379,5 @@ g = matrix(g_part + g_hom %*% c,nrow = k,byrow = TRUE)
 test_all(k,n,f,g)
 ```
 
-```
-##       CwC   MC  fCC  pCC  fPC  pPC  aPC  fTC  pTC
-## [1,] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-```
-
-
+    ##       CwC   MC  fCC  pCC  fPC  pPC  aPC  fTC  pTC
+    ## [1,] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
