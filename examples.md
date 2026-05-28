@@ -292,7 +292,7 @@ cbind(test_all(k,n,f,g),DC)
 
 Note: As the example satisfies CC, it also satisfies QC in Table 3.
 
-##### Example 3.13
+##### Example 3.14
 
 ``` r
 k = 4
@@ -314,7 +314,7 @@ test_all(k,n,f,g)
     ##       CwC   MC   fCC   pCC   fPC   pPC  aPC   fTC   pTC
     ## [1,] TRUE TRUE FALSE FALSE FALSE FALSE TRUE FALSE FALSE
 
-##### Example 3.14
+##### Example 3.15
 
 ``` r
 k = 3
@@ -338,7 +338,7 @@ test_all(k,n,f,g)
     ##        CwC    MC   fCC   pCC   fPC  pPC  aPC   fTC   pTC
     ## [1,] FALSE FALSE FALSE FALSE FALSE TRUE TRUE FALSE FALSE
 
-##### Example 3.15
+##### Example 3.16
 
 ``` r
 k = 3
@@ -360,7 +360,7 @@ test_all(k,n,f,g)
     ##        CwC   MC   fCC   pCC  fPC  pPC  aPC   fTC   pTC
     ## [1,] FALSE TRUE FALSE FALSE TRUE TRUE TRUE FALSE FALSE
 
-##### Example 3.16 (Note: Finding such an example with only N = 13 forecasts required a lot of searching…)
+##### Example 3.17 (Note: Finding such an example with only N = 13 forecasts required a lot of searching…)
 
 ``` r
 load("forecasts13.RData")
