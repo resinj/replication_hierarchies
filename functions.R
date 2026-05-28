@@ -410,7 +410,7 @@ plot_UQC = function(k,n,f,g){
   coverage_upper = function(u){
     sapply(u, function(u) cdf(quant(u,f),g))
   }
-  par(mfrow = c(1,1), lwd = 2,mar = c(2.2,2.2,0.2,0),mgp = c(1.2,0.4,0))
+  par(mfrow = c(1,1), lwd = 2,mar = c(2.5,2.5,0.1,0.1),mgp = c(1.4,0.4,0))
   plot(NULL,xlim = c(0,1),ylim = c(0,1),xlab = expression(alpha),ylab = "coverage")
   cov_l = coverage_lower(0:n)/n
   cov_u = coverage_upper(0:n)/n
@@ -439,7 +439,7 @@ plot_QC = function(k,n,f,g){
     sapply(u, function(u) cdf(quant(u,f),g))
   }
   # Coverages
-  par(mfrow = c(2,1), lwd = 2,mar = c(2.2,2.2,0.2,0),mgp = c(1.2,0.4,0))
+  par(mfrow = c(1,1), lwd = 2,mar = c(2.5,2.5,0.1,0.1),mgp = c(1.4,0.4,0))
   plot(NULL,xlim = c(0,1),ylim = c(0,1),xlab = expression(alpha),ylab = "coverage")
   cov_l = coverage_lower(0:n)/n
   cov_u = coverage_upper(0:n)/n

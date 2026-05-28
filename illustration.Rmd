@@ -8,6 +8,15 @@ knit: (function(inputFile, encoding) {
   output_format = "all") })
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  # dev = "pdf",
+  # fig.ext = "pdf",
+  fig.width = 5,
+  fig.height = 3.5
+)
+```
+
 We start by loading the functions implementing example generation, linear constraints and some visualizations (and some packages required by the functions).
 
 ```{r, message=FALSE}

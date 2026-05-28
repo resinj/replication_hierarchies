@@ -42,7 +42,7 @@ test_all(k,n,f,g)
 plot_QC(k,n,f,g)
 ```
 
-![](examples_files/figure-gfm/plotQC-1.png)<!-- -->
+![](examples_files/figure-gfm/plotQC-1.png)<!-- -->![](examples_files/figure-gfm/plotQC-2.png)<!-- -->
 
 The figure plots upper and lower coverage (top) and predicted quantiles
 against quantile levels to facilitate visual verification of the

@@ -191,4 +191,4 @@ predictive quantiles:
 plot_QC(k,n,f,g)
 ```
 
-![](illustration_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](illustration_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->![](illustration_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
