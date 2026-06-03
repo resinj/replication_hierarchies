@@ -5,7 +5,7 @@ output:
   github_document: default
 ---
 
-#### This repository provides supplementary code for the paper "Hierarchies of Calibration: Classification meets Regression" by Johannes Resin, Lu Yang and Tilmann Gneiting ([arXiv:XXX](https://arxiv.org/abs/XXX)).
+#### This repository provides supplementary code for the paper "Hierarchies of Calibration: Classification meets Regression" by Johannes Resin, Lu Yang and Tilmann Gneiting ([arXiv:2606.03245](https://arxiv.org/abs/2606.03245)).
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

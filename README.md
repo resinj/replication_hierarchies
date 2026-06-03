@@ -2,7 +2,7 @@ Supplementary repository for Resin, Yang and Gneiting (2026+)
 ================
 Johannes Resin
 
-#### This repository provides supplementary code for the paper “Hierarchies of Calibration: Classification meets Regression” by Johannes Resin, Lu Yang and Tilmann Gneiting ([arXiv:XXX](https://arxiv.org/abs/XXX)).
+#### This repository provides supplementary code for the paper “Hierarchies of Calibration: Classification meets Regression” by Johannes Resin, Lu Yang and Tilmann Gneiting ([arXiv:2606.03245](https://arxiv.org/abs/2606.03245)).
 
 ##### Required packages
 
